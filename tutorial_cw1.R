@@ -5,3 +5,4 @@ install.packages('package')
 library('package') #package loading
 
 
+httr::GET #explicit reference to package
