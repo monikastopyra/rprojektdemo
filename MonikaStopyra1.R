@@ -24,6 +24,28 @@ sredniaPredkosc
 
 
 
-#3. Utwórz funkcję obliczającą współczynnik korelacji r Pearsona dla 2 wektorów o tej samej długości.
-Wczytaj dane plik dane.csv i oblicz współczynnik dla wagi i wzrostu. W komentarzu napisz co oznacza wynik.
+#3. Utwórz funkcję obliczającą współczynnik korelacji r Pearsona 
+    # dla 2 wektorów o tej samej długości.
+    # Wczytaj dane plik dane.csv i oblicz współczynnik dla wagi i wzrostu. 
+    # W komentarzu napisz co oznacza wynik.
+
+df <- read.table("dane.csv", header = TRUE, sep = ";")
+View(df)
+
+wspolKorelPearsona <- function (x,y) {
+
+  meanX <- mean(x)
+  meanY <- mean(y)
+  
+  r <- sum((x - meanX)*(y - meanY))/(sqrt(sum((x - meanX)^2))*sqrt(sum((y - meanY)^2))) 
+  r
+}
+
+wspolKorelPearsona(x = df$waga, y = df$wzrost)
+
+# Wspóczynnik korelacji Pearsona zbliżony do 0,98 wskazuje na bardzo silna korelacje 
+# miedzy waga a wzrostem w danym zbiorze danych. Potwierdzenie silnej zależnoci
+# liniowej możemy zobaczyć na poniższym wykresie:
+plot(df$waga, df$wzrost)
+
 
