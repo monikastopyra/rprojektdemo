@@ -69,4 +69,40 @@ stworzDataFrame<-function(nrow=1){
   View(df)
 }
 
+# 4. Napisz funkcję , która pobiera sciezkeKatalogu, nazweKolumny, jakaFunkcje, DlaIluPlikow i liczy: 
+  #  mean, median,min,max w zależności od podanej nazwy funkcji w argumencie, z katologu który podaliśmy
+  #  i z tylu plików ilu podaliśmy dla wybranej nazwy kolumny. 
+  #  UWAGA: w podanych plikach R pobierając komórki nazwane liczbami R wstawi przed nazwy X. 
+  #  Funkcję przetestuj dla katalogu smogKrakow.zip.  Wykonując obliczenia pomiń brakujące wartości.
+
+path <- "C:\\Users\\monik\\Documents\\PJATK Big Data\\Semestr 2\\R\\Zadanie_2\\smogKrakow"
+
+liczZplikow <- function(sciezka,nazwaKolumny,jakaFunkcja="mean",DlaIluPlikow=1){ 
   
+  files <- list.files(sciezka)
+  
+  for (n in DlaIluPlikow)
+  {
+    data <- read.table(paste(sciezka,files[n], sep="\\"), header = TRUE, sep = ",")
+  }
+  
+  result <- if ( jakaFunkcja=='mean') {
+               mean(na.omit(data[[nazwaKolumny]]))
+             } else if ( jakaFunkcja=='max') {
+               max(na.omit(data[[nazwaKolumny]]))
+             } else if ( jakaFunkcja=='min') {
+               min(na.omit(data[[nazwaKolumny]]))
+             } else if ( jakaFunkcja=='median') {
+               median(na.omit(data[[nazwaKolumny]]))
+             } else {
+               print('Function can only be: mean,median, max and min.')
+             }
+  
+
+  return(result)
+}
+
+liczZplikow(sciezka=path,nazwaKolumny='X142_pm10',jakaFunkcja='min',DlaIluPlikow = 3)
+liczZplikow(sciezka=path,nazwaKolumny='X142_pressure',jakaFunkcja='median',DlaIluPlikow = 3)
+liczZplikow(sciezka=path,nazwaKolumny='X142_pressure',jakaFunkcja='max',DlaIluPlikow = 2)
+liczZplikow(sciezka=path,nazwaKolumny='X142_pressure')
