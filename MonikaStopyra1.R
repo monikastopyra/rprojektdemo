@@ -48,4 +48,25 @@ wspolKorelPearsona(x = df$waga, y = df$wzrost)
 # liniowej możemy zobaczyć na poniższym wykresie:
 plot(df$waga, df$wzrost)
 
+# 4. Napisz funkcję zwracającą ramke danych z danych podanych przez użytkownika 
+  #  stworzDataFrame <- function(ile=1)
+  #  W pierwszym wierszu użytkownik podaje nazwy kolumn. 
+  #  W kolejnych wierszach zawartość wierszy ramki danych ( tyle wierszy ile podaliśmy
+  #  w argumencie ile. ile=1 oznacza, że gdy użytkownik nie poda żadnej wartości jako parametr, 
+  #  domyślna wartością będzie 1)
 
+stworzDataFrame<-function(nrow=1){
+  col_names<-readline(prompt="Podaj nazwy kolumn, oddzielajac przecinkami: ")
+  columns<-(strsplit(col_names,","))
+  as.vector(columns)
+  df<-data.frame(matrix(NA, nrow=nrow, ncol=lengths(columns)))
+  colnames(df) <- t(unlist(columns))
+  
+  for(col in colnames(df)){
+    df[col] <- c(strsplit(readline(message("Podaj oddzielone przecinkami wartosci wierszy kolumny ", col )), ",")[[1]])
+  }
+  
+  View(df)
+}
+
+  
